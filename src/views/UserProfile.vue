@@ -66,27 +66,40 @@
       </div>
   
       <div class="font-semibold text-gray-400 text-center" v-else>Loading...</div>
-      
+
+      <router-link to="/myUrl">
+        Short Links
+      </router-link> 
+       
     </div>
   </template>
   
   <script setup lang="ts">
-  import { reactive, ref } from "vue";
+  import { reactive, ref, computed } from "vue";
   import { onAuthStateChanged, updateProfile, type User } from "firebase/auth";
   import { useVuelidate } from "@vuelidate/core";
   import { required, email, minLength } from "@vuelidate/validators";
   import { auth } from "../utils/firebase";
   import { updateDoc, deleteDoc,  } from "firebase/firestore";
+import { useRouter, useRoute } from "vue-router";
+
+
 //   import { useUserStore } from "@/stores/user";
 //   import useFileUpload from "@/composables/use-file-upload";
   
 //   const userStore = useUserStore();
   // const { uploadFile } = useFileUpload();
+
+
+  const router = useRouter();
+  const route = useRoute()
+// const Urls = router.currentRoute.value.params.urls;
   
   const isSubmitting = ref(false);
   const isLoading = ref(true);
   const fileInput = ref<HTMLInputElement | null>();
   const files = ref();
+  const urls = ref([])
   
   const profile = reactive({
     email: "",
@@ -99,6 +112,9 @@
     displayName: { required },
   };
   
+const urlId = route.params.id
+const urlsValue = computed(() => route.params.urls)
+
   const v$ = useVuelidate(profileRules, profile);
   
   const handleProfileUpdate = async () => {

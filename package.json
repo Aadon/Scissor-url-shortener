@@ -16,6 +16,7 @@
     "@vuelidate/validators": "^2.0.4",
     "axios": "^1.6.7",
     "firebase": "^10.8.0",
+    "qrcode.vue": "^3.4.1",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },

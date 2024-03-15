@@ -12,6 +12,7 @@ import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyAMnRfZgptBo0Sfvzict90QSNijM5liugk",
   authDomain: "url-shortener-ba30e.firebaseapp.com",
+  databaseURL: "https://url-shortener-ba30e-default-rtdb.firebaseio.com/",
   projectId: "url-shortener-ba30e",
   storageBucket: "url-shortener-ba30e.appspot.com",
   messagingSenderId: "710129886320",
@@ -25,4 +26,4 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 // const app = initializeAdminApp({ projectId: "feedie-903e4" });
 export const auth = getAuth(app);
-const analytics = getAnalytics(app);
+export const analytics = getAnalytics(app);

@@ -20,6 +20,7 @@ export const createURL = async (data: {
   shortenedUrl: string;
   userId: string,
   id: string
+  qrCode: string
   createdAt: {}
 }) => {
   try {
@@ -60,39 +61,21 @@ export const getUrls = async (userId: string) => {
 };
 
 
-export const shortenLinkRequest = async (longUrl: string) => {
 
+const updateUrl = async (userId: string) => {
   try {
-    const response1 = await axios.post("https://api-ssl.bitly.com/v4/shorten", {
-      long_url: longUrl.value,
-      domain: "bit.ly",
-      group_guid: 'Bo33kKlqI2R',
-    }, {
-      headers: {
-        Authorization: 'Bearer 6bc6989ab9f1186cd8b3ee60a89a20ac582b3f7e',
-        "Content-Type": "application/json",
-      }
-    });
-    
-    const new_link = response1.data.link.replace("https://", "");
-
-    const response2 = await axios.get(`https://api-ssl.bitly.com/v4/bitlinks/${new_link}/qr?image_format=png`, {
-      headers: {
-        Authorization: 'Bearer 6bc6989ab9f1186cd8b3ee60a89a20ac582b3f7e',
-      }
-    });
-    // console.log('created link', new_link)
-    shortLink.value = response2.data;
-    console.log('result', response2.data);
+     await updateDoc(doc(db, 'urls', userId), data)
   } catch (error) {
-    console.error(error);
+    console.log(error)
   }
-};
-// const updateUrl = async () => {
-//   const response = await updateDoc(doc(db, 'urls', data.userId))
 
-// }
+}
 
-// const deleteUrl = async () => {
-// const response = await deleteDoc(doc(db, 'urls', userId))
-// }
+export const deleteUrl = async (userId: string) => {
+  try {
+     await deleteDoc(doc(db, 'urls', userId))
+  } catch (error) {
+    console.log(error)
+  }
+
+}
