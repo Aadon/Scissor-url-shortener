@@ -12,7 +12,7 @@
                     </p>
                     <span class="flex justify-end w-full gap-4">
                         <i class="cursor-pointer far fa-edit"></i>
-                        <i class="cursor-pointer text-red-600 fa-solid fa-trash" @click="removeLink"></i>
+                        <i class="cursor-pointer text-red-600 fa-solid fa-trash" ></i>
                         <i class="cursor-pointer text-green-600 fa-solid fa-floppy-disk"></i>
                     </span>
                 </li>
@@ -43,13 +43,13 @@ onMounted(async () => {
     
 })
 
-const removeLink = async (userId: string) => {
-    try {
-       await deleteUrl(userId)
-    } catch (error) {
-        console.log(error)
-    }
-}
+// const removeLink = async (userId: string) => {
+//     try {
+//        await deleteUrl(userId)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 </script>
 
