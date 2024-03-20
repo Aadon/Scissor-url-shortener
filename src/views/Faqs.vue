@@ -4,13 +4,12 @@
         <h1 class="text-3xl font-bold">FAQs</h1>
     </div>
 
-    <div class="h-[860px] mt-10 w-[792px] mx-auto text-lg font-normal">
+    <div class="h-[860px] mt-10 px-8 md:w-[792px] max-w-[1200px] mx-auto text-lg font-normal">
         <div class="flex flex-col border-b border-[#ccc] py-6" 
         v-for="(question, index) in questions" :key="index">
             <li class="flex justify-between list-none">
 
                 
-        
                 <h3 class="text-xl"> {{ question.title }}</h3>
                 <img v-if="!question.showAnswer" 
                 src="../assets/images/plus.svg" 
@@ -73,12 +72,12 @@ const questions = ref([
     },
     {
         title: 'What is QR code and what can it do?',
-        answer: '',
+        answer: 'A QR code, short for Quick Response code, is a type of two-dimensional barcode that contains information encoded within it. QR codes can store various types of data, including text, URLs, contact information, or other types of information.',
         showAnswer: false
     },
     {
         title: 'Is there an API available for integrating the URL shortening service into my own applications or websites?',
-        answer: '',
+        answer: 'Yes, there ia an API.',
         showAnswer: false
     }
 ])

@@ -75,85 +75,85 @@
   </template>
   
   <script setup lang="ts">
-  import { reactive, ref, computed } from "vue";
-  import { onAuthStateChanged, updateProfile, type User } from "firebase/auth";
-  import { useVuelidate } from "@vuelidate/core";
-  import { required, email, minLength } from "@vuelidate/validators";
-  import { auth } from "../utils/firebase";
-  import { updateDoc, deleteDoc,  } from "firebase/firestore";
-import { useRouter, useRoute } from "vue-router";
+import { reactive, ref, computed, onMounted } from "vue";
+import { onAuthStateChanged, updateProfile, type User } from "firebase/auth";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email, minLength } from "@vuelidate/validators";
+import { auth } from "../utils/firebase";
+import { useUserStore } from "../store/user";
+import useFileUpload from "../composables/UserFileUpload";
+import { createUser, getUser } from "../services";
 
+const userStore = useUserStore();
+const { uploadFile } = useFileUpload();
 
-//   import { useUserStore } from "@/stores/user";
-//   import useFileUpload from "@/composables/use-file-upload";
-  
-//   const userStore = useUserStore();
-  // const { uploadFile } = useFileUpload();
+const isSubmitting = ref(false);
+const isLoading = ref(true);
+const fileInput = ref<HTMLInputElement | null>();
+const files = ref();
 
+const userData = ref();
 
-  const router = useRouter();
-  const route = useRoute()
-// const Urls = router.currentRoute.value.params.urls;
-  
-  const isSubmitting = ref(false);
-  const isLoading = ref(true);
-  const fileInput = ref<HTMLInputElement | null>();
-  const files = ref();
-  const urls = ref([])
-  
-  const profile = reactive({
-    email: "",
-    displayName: "",
-    photoUrl: "",
-  });
-  
-  const profileRules = {
-    email: { required, email },
-    displayName: { required },
-  };
-  
-const urlId = route.params.id
-const urlsValue = computed(() => route.params.urls)
+const profile = reactive({
+  email: "elochi238@gmail.com",
+  displayName: "",
+  photoUrl: "",
+});
 
-  const v$ = useVuelidate(profileRules, profile);
-  
-  const handleProfileUpdate = async () => {
-    try {
-      isSubmitting.value = true;
-  
-      await updateProfile(auth.currentUser as User, {
-        displayName: profile.displayName,
-        photoURL: profile.photoUrl,
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      isSubmitting.value = false;
-    }
-  };
-  
-  const handleFileChange = (event: Event) => {
-    //   console.log((event.target as EventTarget).files);
-    if (fileInput.value?.files) {
-      // uploadFile(fileInput.value?.files[0], {
-      //   onDownloadUrl: (downloadUrl) => {
-      //     console.log(downloadUrl);
-      //     profile.photoUrl = downloadUrl;
-      //   },
-      // });
-    }
-  };
-  
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log(user);
-      isLoading.value = false;
-      profile.email = user?.email ?? "";
-      profile.displayName = user?.displayName ?? "";
-      profile.photoUrl = user?.photoURL ?? "";
-    }
-  });
-  
-  </script>
+const profileRules = {
+  email: { required, email },
+  displayName: { required },
+};
+
+const v$ = useVuelidate(profileRules, profile);
+
+const handleProfileUpdate = async () => {
+  try {
+    isSubmitting.value = true;
+
+    await updateProfile(auth.currentUser as User, {
+      displayName: profile.displayName,
+      photoURL: profile.photoUrl,
+    });
+
+    await createUser({
+      userId: auth.currentUser?.uid as string,
+      displayName: profile.displayName,
+      photoURL: profile.photoUrl,
+      ...userData.value,
+    });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    isSubmitting.value = false;
+  }
+};
+
+const handleFileChange = (event: Event) => {
+  //   console.log((event.target as EventTarget).files);
+  if (fileInput.value?.files) {
+    uploadFile(fileInput.value?.files[0], {
+      onDownloadUrl: (downloadUrl) => {
+        console.log(downloadUrl);
+        profile.photoUrl = downloadUrl;
+      },
+    });
+  }
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log(user);
+    isLoading.value = false;
+    profile.email = user?.email ?? "";
+    profile.displayName = user?.displayName ?? "";
+    profile.photoUrl = user?.photoURL ?? "";
+
+    getUser(user.uid).then((response) => {
+      userData.value = response;
+    });
+  }
+});
+</script>
   
   <style scoped></style>

@@ -1,64 +1,101 @@
 <template>
-    <div class="flex justify-between items-center space-y-3 w-[1200px] mt-8 mx-auto">
+    <div class="container flex justify-around gap-6 items-center max-w-[1200px] mt-14 mx-auto">
         <div class="pt-3">
-            <img src="@/assets/images/logo.svg"/>
+            <router-link to="/">
+                <img src="@/assets/images/logo.svg"/>
+            </router-link>
         </div>
-        <div class="flex gap-8 text-xl ">
+
+        <nav class="md:flex gap-6  text-xl hidden">
             <router-link to="/myUrls" class="" active-class="active-link">My URLs</router-link>
             <router-link to="/features" class="" active-class="active-link">Features</router-link>
             <router-link to="/pricing"  class="" active-class="active-link">Pricing</router-link>
             <router-link to="/analytics"  class="" active-class="active-link">Analytics</router-link>
             <router-link to="/faqs" class="" active-class="active-link">FAQs</router-link>
-        </div>
-        <div class=" mx-5 text-l font-semibold">
-            <router-link to="/login" class="text-[#0065fe]">Log In</router-link>
-            <router-link to="/myurls"
-             class="bg-white ml-8 rounded-full px-6 py-2 border border-[#0065fe] text-[#0065fe]">
+        </nav>
+    
+
+        <div class="md:flex items-center text-lg font-semibold hidden">
+            <router-link 
+            to="/login" 
+            class="text-[#0065fe]"
+            v-if="!isAuthenticated"
+            >Log In</router-link>
+            <button v-else @click="handleSignOut" class="text-[#0065fe]">Sign Out</button>
+            <router-link to="/shortenurl"
+             class="bg-white rounded-full px-4 py-2 border border-[#0065fe] text-[#0065fe] text-sm ml-4">
              Try for free
             </router-link>
         </div>
-        <div class="ml-4 text-3xl text-[#0065fe]">
-            <i class='fa-solid fa-bars'></i>
-        </div>
-    </div>
 
-    <!-- mobile view -->
-    <div class="fixed left-0 top-0 w-[60%] h-full border-r border-[#0065fe] pt-12 hidden">
-    <div class="w-full">
-            <img src="@/assets/images/logo.svg"/>
-            <div class="ml-4 text-xl text-[#0065fe] md:hidden"
+        <div class="flex justify-end w-full px-6 md:hidden">
+            <div class="ml-4 text-2xl text-[#0065fe] cursor-pointer"
             v-if="!toggle"
             @click="toggleMenu">
             <i class='fa-solid fa-bars'></i>
         </div>
-        <div class="ml-4 text-3xl text-[#0065fe] md:hidden"
-        v-else
+       
+        </div>
+    </div>
+
+    <!-- mobile view -->
+    <div v-if="toggle" class="fixed left-0 top-0 w-[100%] h-full border-r border-[#0065fe] bg-black pt-12 md:hidden">
+        <div class="flex flex-end ml-4 w-full text-2xl text-[#0065fe] cursor-pointer"
         @click="toggleMenu">
-            <i class='fa-solid fa-x'></i>'
+            <i class='fa-solid fa-x'></i>
         </div>
-        </div>
-        <div class="flex flex-col text-3xl px-6">
-            <router-link to="/myUrls">My URLs</router-link>
-            <router-link to="/features">Features</router-link>
-            <router-link to="/pricing">Pricing</router-link>
-            <router-link to="/analytics">Analytics</router-link>
-            <router-link to="/faqs">FAQs</router-link>
-        </div>
-        <div class=" flex mx-auto font-semibold ">
-            <router-link to="/login" class="text-[#0065fe]">Log In</router-link>
-            <button class="bg-white ml-8 rounded-full px-6 py-1 border border-[#0065fe] text-[#0065fe]">Try for free</button>
+        <nav class="flex flex-col justify-between items-center text-3xl  my-4 text-[#edf0f0]">
+            <router-link to="/myurls" class="my-4" @click="toggleMenu">My URLs</router-link>
+            <router-link to="/features" class="my-4" @click="toggleMenu">Features</router-link>
+            <router-link to="/pricing" class="my-4" @click="toggleMenu">Pricing</router-link>
+            <router-link to="/analytics" class="my-4" @click="toggleMenu">Analytics</router-link>
+            <router-link to="/faqs" class="my-4" @click="toggleMenu">FAQs</router-link>
+        </nav>
+        
+        <div class="flex justify-center gap-6 font-semibold w-[600px] mt-20">
+            <router-link to="/login" class="text-[#0065fe]" @click="toggleMenu">Log In</router-link>
+            <router-link to="/shortenurl" class="bg-white rounded-full px-4 py-1 border border-[#0065fe] text-[#0065fe]" @click="toggleMenu">Try for free</router-link>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { ref } from "vue";
+import { auth } from "../utils/firebase";
 
 
     let toggle = ref(false)
+    const isAuthenticated = ref(false)
 
     const toggleMenu = () => {
         toggle.value = !toggle.value
+    }
+
+    onAuthStateChanged(auth, (user) => {
+  if (user) {
+   
+    isAuthenticated.value = !!user
+    // const uid = user.uid;
+
+    // localStorage.setItem("isLoggedIn");
+
+    console.log("----=====>", user);
+
+    
+  } else {
+    
+    console.log("User should be signed out");
+  }
+});
+    
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth)
+            
+        } catch(error) {
+            console.log(error)
+        }
     }
 </script>
 
@@ -66,4 +103,5 @@ import { ref } from "vue";
     .active-link {
         color: #0065fe;
     }
+
 </style>

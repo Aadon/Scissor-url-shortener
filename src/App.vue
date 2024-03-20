@@ -9,9 +9,9 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 
-// const userStore = useUserStore();
+const userStore = useUserStore();
 
-// const auth = getAuth();
+const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
    

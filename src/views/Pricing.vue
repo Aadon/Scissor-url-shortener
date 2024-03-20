@@ -1,6 +1,6 @@
 <template>
-            <div class="container mt-44 flex justify-center w-full text-base h-full">
-                <div class="flex flex-col ">
+            <div class="mt-44 flex justify-center max-w-[1200px] text-base h-full">
+                <div class="flex flex-col px-8">
                     <div class="flex gap-4">
                         <img src="../assets/images/Line 70.svg"/>
                         <h2 class="text-3xl font-semibold">
@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <div class="wrapper md:inline-flex relative mt-[180px] h-[600px] w-full">
+            <div class="wrapper flex flex-col md:inline-flex md:flex-row relative mt-[180px] h-[900px] md:h-[670px] w-full">
 
                 <div class="border border-[#0065fe] w-[400px] rounded-md h-[455px] p-12 mx-auto text-lg">
                     <p class="text-xl mb-3">Basic</p>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="border border-[#0065fe] w-[400px] rounded-md h-[455px] p-12 mx-auto">
+                <div class="border border-[#0065fe] w-[400px] rounded-md h-[455px] p-16 mx-auto">
                     <p class="text-xl mb-3">Teams</p>
                     <div class="py-4 space-y-3">
                         <h2 class="font-bold text-3xl tracking-wide">$25/month</h2>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div
-                    class="pro border w-[510px] rounded-md h-[627px] p-16 absolute bg-[#1e3448] -top-24 left-[32%] text-white py-28">
+                    class="border md:w-[410px] w-[400px] rounded-md h-[627px] p-16 absolute bg-[#1e3448] md:-top-24 md:left-[32%] top-[101%] left-10 text-white py-28 mx-auto">
                     <p class="text-2xl mb-3 ">Professional</p>
                     <div class=" space-y-6">
                         <h2 class="font-bold text-3xl py-1 tracking-wide">$15/month</h2>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center gap-8 text-lg text-[#0065fe] mb-16">
+            <div class="flex justify-center gap-x-8 text-lg text-[#0065fe] mt-[750px] md:mt-0">
                 <button class="border border-[#0065fe] rounded-full px-6 py-1 capitalize hover:bg-[#0065fe] hover:text-white">
                     get custom pricing
                 </button>
@@ -119,17 +119,5 @@
 
 </script>
 <style scoped>
-    @media  screen and (max-width: 640px) {
-        .pro {
-        position: absolute;
-        top: 100%;
-        left: 10%;
-    }
-    }
-
-    /* .pro {
-        position: absolute;
-        top: -100%;
-        left: 10%;
-    } */
+    
 </style>

@@ -32,6 +32,11 @@ export const createURL = async (data: {
 };
 
 export const createUser = async (data: {
+  userId: string;
+  firstName?: string;
+  lastName?: string;
+  displayName?: string;
+  photoURL?: string;
 }) => {
   try {
     const response = await addDoc(collection(db, "users"), data);
@@ -60,6 +65,24 @@ export const getUrls = async (userId: string) => {
   }
 };
 
+
+export const getUser = async (userId: string) => {
+  try {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return docSnap.data();
+    } else {
+      
+      console.log("No such document!");
+      return {};
+    }
+  } catch (error) {
+    console.log(error)
+  }
+};
 
 
 const updateUrl = async (userId: string) => {

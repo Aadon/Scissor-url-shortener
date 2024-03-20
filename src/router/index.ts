@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
 import Dashboard from "../layouts/Dashboard.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
@@ -11,26 +10,22 @@ import Features from "@/views/Features.vue";
 import Analytics from "@/views/Analytics.vue";
 import Faqs from "@/views/Faqs.vue";
 import UrlsList from "@/views/UrlsList.vue";
+import ShortenUrl from "@/components/ShortenUrl.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      redirect: "/home",
+      redirect: "/myurls",
       component: Dashboard,
       children: [
-        {
-          path: "/home",
-          name: "home",
-          component: Home,
-        },
+        
         {
           path: "/myurls",
           name: "myurls",
           component: MyUrls
         },
-        
         {
           path: "/pricing",
           name: "pricing",
@@ -59,7 +54,13 @@ const router = createRouter({
        {
         path: '/result/:id',
         name: 'urlslist',
-        component: UrlsList
+        component: UrlsList,
+        meta: { requiresAuth: true },
+       },
+       {
+        path: "/shortenurl",
+          name: "shortenurl",
+          component: ShortenUrl,
        }
         
       ],

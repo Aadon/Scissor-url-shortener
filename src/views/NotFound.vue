@@ -4,7 +4,7 @@
   >
     <div class="text-center">
       <img
-        src="../assets/images/error.png"
+        src="../assets/images/404.jpg"
         alt="404 Image"
         class="mx-auto mb-8 max-w-xs md:max-w-lg"
       />

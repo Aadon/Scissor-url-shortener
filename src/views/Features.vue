@@ -1,5 +1,5 @@
 <template>
-        <div class="inline-flex h-[380px] gap-24 mt-[96px] text-xl  mx-auto px-10 container">
+        <div class="md:inline-flex gap-24 mt-[140px] text-lg mx-auto px-10 md:mb-0 mb-[150px]">
             <div class="flex flex-col  ">
                 <div class="flex items-center">
                     <img src="../assets/images/line 70.svg" />
@@ -12,11 +12,11 @@
                     and usge tracking with advanced analytics is second to none.
                 </p>
             </div>
-            <div class="right-box">
-                <div class="inline-flex gap-16 right-box">
+            <div class="">
+                <div class="inline-flex gap-16">
                     <div>
                         <div class="">
-                            <img src="../assets/images/Ellipse 2.svg" alt="">
+                            <img src="../assets/images/Ellipse 2.svg">
                             <h2 class="text-2xl mt-4 mb-3 font-semibold">URL Shortening</h2>
                         </div>
                         <p class="">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="">
                         <div class="">
-                            <img src="../assets/images/Ellipse 2 (2).svg" alt="">
+                            <img src="../assets/images/Ellipse 2 (2).svg">
                             <h2 class="text-2xl mt-4 mb-3 font-semibold">Custom URL</h2>
                         </div>
                         <p>
@@ -35,10 +35,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="inline-flex gap-16 mt-16 right-box">
+                <div class="inline-flex gap-16 mt-16">
                     <div class="">
                         <div class="">
-                            <img src="../assets/images/grid.svg" alt="">
+                            <img src="../assets/images/grid.svg">
                             <h2 class="text-2xl mt-4 mb-3 font-semibold">QR Codes</h2>
                         </div>
                         <p>
@@ -68,14 +68,4 @@
 
 <style scoped>
 
-    @media screen and (max-width: 640px) {
-        .container {
-        display: flex;
-        flex-direction: column;
-        }
-        .right-box {
-        display: flex;
-        flex-direction: column;
-    }
-    }
 </style>
