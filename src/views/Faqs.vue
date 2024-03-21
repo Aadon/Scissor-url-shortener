@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center gap-2 mt-24">
-        <img src="../assets/images/Line 70.svg">
+        <img src="../assets/images/line70.svg">
         <h1 class="text-3xl font-bold">FAQs</h1>
     </div>
 
