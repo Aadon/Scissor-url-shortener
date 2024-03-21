@@ -2,7 +2,7 @@
         <div class="md:inline-flex gap-24 mt-[140px] text-lg mx-auto px-10 md:mb-0 mb-[150px]">
             <div class="flex flex-col  ">
                 <div class="flex items-center">
-                    <img src="../assets/images/line 70.svg" />
+                    <img src="../assets/images/line70.svg" />
                     <h2 class="text-2xl mx-3 font-semibold mb-4">Why choose <span class="text-[#0065fe]">Scissors</span>
                     </h2>
                 </div>
@@ -62,10 +62,3 @@
     </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
-<style scoped>
-
-</style>

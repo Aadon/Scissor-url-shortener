@@ -75,9 +75,9 @@
     </div>
     <div class="flex justify-end mr-16">
         <p>Terms of Service</p>
-        <img src="../assets/images/Line 70.svg" alt="" class="w-6 h-5">
+        <img src="../assets/images/line70.svg" alt="" class="w-6 h-5">
         <p>Security</p>
-        <img src="../assets/images/Line 70.svg" alt="" class="w-6 h-5">
+        <img src="../assets/images/line70.svg" alt="" class="w-6 h-5">
         <p>Scissor 2024</p>
     </div>
 </template>

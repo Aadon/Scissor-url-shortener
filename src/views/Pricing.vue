@@ -2,7 +2,7 @@
             <div class="mt-44 flex justify-center max-w-[1200px] text-base h-full">
                 <div class="flex flex-col px-8">
                     <div class="flex gap-4">
-                        <img src="../assets/images/Line 70.svg"/>
+                        <img src="../assets/images/line70.svg"/>
                         <h2 class="text-3xl font-semibold">
                         A <span class="text-[#0065fe]">price perfect</span> for your needs.
                         </h2>
